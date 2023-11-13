@@ -24,7 +24,6 @@ class Message:
         self.request = None
         self.response_created = False
 
-   
     def _get_clipboard(self):
         return paste()
 
