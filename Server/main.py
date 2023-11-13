@@ -19,7 +19,7 @@ class App(ctk.CTk):
 
       #COnfigure Window
       self.title("TextShare")
-      self.iconbitmap( self.cwd + r"\bin\textshare.ico")
+      #self.iconbitmap( self.cwd + r"\bin\textshare.ico")
 
       #Configure Grid
    
