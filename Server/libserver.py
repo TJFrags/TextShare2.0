@@ -25,6 +25,7 @@ class Message:
         self.response_created = False
 
     def _get_clipboard(self):
+        #print(paste())
         return paste()
 
     def _get_text(self):
