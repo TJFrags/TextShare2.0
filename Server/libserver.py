@@ -7,7 +7,7 @@ import pyautogui as pg
 import cv2
 import pytesseract as pyt
 from pyperclip import paste
-
+#
 class Message:
     def __init__(self, selector, sock, addr, def_regeon):
         self.tessconfig = fr"--psm 6 --oem 3"

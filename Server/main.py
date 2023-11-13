@@ -9,7 +9,7 @@ from appServer import Server
 
 ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
-
+#
 class App(ctk.CTk):
    def __init__(self):
       super().__init__()
