@@ -41,9 +41,10 @@ class Client:
 
 
     def Main(self, action):
+        print(action)
         host = "192.168.1.147"
         port = 4444
-        action = "getClipboard"
+        action = action
         request = self.create_request(action)
         self.start_connection(host, port, request)
 
@@ -67,3 +68,7 @@ class Client:
             print("Caught keyboard interrupt, exiting")
         finally:
             self.sel.close()
+
+
+
+Client().Main(sys.argv[1])

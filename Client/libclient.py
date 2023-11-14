@@ -3,6 +3,7 @@ import selectors
 import json
 import io
 import struct
+import pyperclip as cp
 
 
 class Message:
@@ -84,6 +85,7 @@ class Message:
         content = self.response
         result = content.get("text")
         print(f"Got text: {result}")
+        cp.copy(result)
 
     def _process_response_binary_content(self):
         content = self.response
