@@ -19,7 +19,7 @@ class App(ctk.CTk):
 
       #COnfigure Window
       self.title("TextShare")
-      #self.iconbitmap( self.cwd + r"\bin\textshare.ico")
+      self.iconbitmap( self.cwd + r"\server\bin\textshare.ico")
 
       #Configure Grid
    
@@ -49,8 +49,6 @@ class App(ctk.CTk):
       self.txt_Port = ctk.CTkEntry(master=self.frame, width= 50, placeholder_text="Port",)
       self.txt_Port.grid(row = 0, column = 1, pady = 10, padx = 10)
       self.txt_Port.insert(0, "4444")
-
-      
 
       self.btn_startServer = ctk.CTkButton(master=self.frame, text="Start Server", command= self.Start_server)
       self.btn_startServer.grid(row = 2, column = 0, sticky = "S", pady = 10, padx = 10)
@@ -106,8 +104,6 @@ class App(ctk.CTk):
       self.master_screen.deiconify()
       self.withdraw()
 
-
-
       self.snip_surface.bind("<ButtonPress-1>", self.on_button_press)
       self.snip_surface.bind("<B1-Motion>", self.on_snip_drag)
       self.snip_surface.bind("<ButtonRelease-1>", self.on_button_release)
@@ -124,12 +120,9 @@ class App(ctk.CTk):
       svr_thread = threading.Thread(target=self.server.Main, args=(int(self.txt_Port.get()),))
       svr_thread.start()
 
-
 if __name__ == "__main__":
    app = App()
-   
 
-   
    # Define a function for quit the window
    def quit_window(icon, item):
       icon.stop()
@@ -144,13 +137,12 @@ if __name__ == "__main__":
    # Hide the window and show on the system taskbar
    def hide_window():
       app.withdraw()
-      image=PIL.Image.open(app.cwd + r"\bin\textshare.ico")
+      image=PIL.Image.open(app.cwd + r"\server\bin\textshare.ico")
       menu=(pystray.MenuItem('Quit', quit_window), pystray.MenuItem('Open', show_window))
       icon=pystray.Icon("name", image, "My System Tray Icon", menu)
       icon.run()
 
    app.protocol('WM_DELETE_WINDOW', hide_window)
-
 
    app.mainloop()
 
