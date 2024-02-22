@@ -23,25 +23,28 @@ class Message:
         self.jsonheader = None
         self.request = None
         self.response_created = False
+        self.supported = ["getText", "getClipboard"]
 
     def _get_clipboard(self):
         #print(paste())
         return paste()
 
     def _get_text(self):
-       # try:
-            image = pg.screenshot("image.png", self.regeon)
+        print("Regeon::::::::    ", self.regeon)
+        try:
+            image = pg.screenshot("image.png", (int(self.regeon[0]), int(self.regeon[1]), int(self.regeon[2]), int(self.regeon[3])))
             image = cv2.imread(self.img)
             if image is not None:
                 grayImage = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
-                text = pyt.image_to_string(grayImage, config=self.tessconfig)
+                text = pyt.image_to_string(grayImage, config=self.tessconfig, lang="afr")
                 text = text.replace("\n", " ")
                 print(text)
                 return text
             else:
                 return "Invalid Image"
-        #except Exception as E:
-         #   print(E)
+        except Exception as E:
+            print(E)
+            print(f"{self.regeon}   {type(self.regeon)}")
             
             return "Error code 293: Convert err"
         
@@ -122,7 +125,8 @@ class Message:
             content = {"text": answer}
 
         else:
-            content = {"result": 0}
+            content = {"text": f"Not a function. Supported: {self.supported}"}
+            
         content_encoding = "utf-8"
         response = {
             "content_bytes": self._json_encode(content, content_encoding),
