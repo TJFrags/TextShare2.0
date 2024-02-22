@@ -6,10 +6,11 @@ import os
 import PIL.Image
 import pyautogui as pg
 from appServer import Server
+import sys
 
 ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
-#
+
 class App(ctk.CTk):
    def __init__(self):
       super().__init__()
@@ -19,7 +20,7 @@ class App(ctk.CTk):
 
       #COnfigure Window
       self.title("TextShare")
-      self.iconbitmap( self.cwd + r"\bin\textshare.ico")
+      #self.iconbitmap( self.cwd + r"\server\bin\textshare.ico")
 
       #Configure Grid
    
@@ -50,8 +51,6 @@ class App(ctk.CTk):
       self.txt_Port.grid(row = 0, column = 1, pady = 10, padx = 10)
       self.txt_Port.insert(0, "4444")
 
-      
-
       self.btn_startServer = ctk.CTkButton(master=self.frame, text="Start Server", command= self.Start_server)
       self.btn_startServer.grid(row = 2, column = 0, sticky = "S", pady = 10, padx = 10)
 
@@ -61,6 +60,9 @@ class App(ctk.CTk):
       #self.btn_stopServer = ctk.CTkButton(master=self.frame, text="Stop Server", command= self.server.stop)
       #self.btn_stopServer.grid(row = 2, column = 2, sticky = "S", pady = 10, padx = 10)
 
+   def exit(self):
+      sys.exit(0)
+      
    def display_rectangle_position(self):
       print(self.start_x)
       print(self.start_y)
@@ -106,8 +108,6 @@ class App(ctk.CTk):
       self.master_screen.deiconify()
       self.withdraw()
 
-
-
       self.snip_surface.bind("<ButtonPress-1>", self.on_button_press)
       self.snip_surface.bind("<B1-Motion>", self.on_snip_drag)
       self.snip_surface.bind("<ButtonRelease-1>", self.on_button_release)
@@ -122,20 +122,17 @@ class App(ctk.CTk):
       ip = socket.gethostbyname(socket.gethostname())
       self.lb_IP.configure(text = f"IP Adreas: {ip}")
       svr_thread = threading.Thread(target=self.server.Main, args=(int(self.txt_Port.get()),))
+      svr_thread.daemon = True
       svr_thread.start()
-
 
 if __name__ == "__main__":
    app = App()
-   
 
-   
    # Define a function for quit the window
    def quit_window(icon, item):
-      icon.stop()
       app.destroy()
-      exit()
-
+      icon.stop()
+      
    # Define a function to show the window again
    def show_window(icon, item):
       icon.stop()
@@ -150,7 +147,6 @@ if __name__ == "__main__":
       icon.run()
 
    app.protocol('WM_DELETE_WINDOW', hide_window)
-
 
    app.mainloop()
 
