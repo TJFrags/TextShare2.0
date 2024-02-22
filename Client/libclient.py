@@ -82,10 +82,13 @@ class Message:
         return message
 
     def _process_response_json_content(self):
-        content = self.response
-        result = content.get("text")
-        print(f"Got text: {result}")
-        cp.copy(result)
+        try:
+            content = self.response
+            result = content.get("text")
+            print(f"Got text: {result}")
+            cp.copy(result)
+        except cp.PyperclipException:
+            print("cant copy result")
 
     def _process_response_binary_content(self):
         content = self.response

@@ -72,3 +72,4 @@ class Client:
 
 
 Client().Main(sys.argv[1])
+#Client().Main("getText")
