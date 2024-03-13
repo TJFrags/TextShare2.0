@@ -4,7 +4,7 @@ import socket
 import os
 import PIL.Image
 import pyautogui as pg
-from appClient import Client
+from Client import Client
 
 ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 ctk.set_default_color_theme("dark-blue")  # Themes: "blue" (standard), "green", "dark-blue"
