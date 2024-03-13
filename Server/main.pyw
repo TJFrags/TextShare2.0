@@ -5,7 +5,7 @@ import socket
 import os
 import PIL.Image
 import pyautogui as pg
-from appServer import Server
+from Server import Server
 import sys
 
 ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"

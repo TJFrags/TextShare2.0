@@ -6,7 +6,7 @@ import selectors
 import traceback
 import pyautogui as pg
 
-import libserver
+import libServer
 #
 class Server():
 
@@ -31,7 +31,7 @@ class Server():
         conn, addr = sock.accept()  # Should be ready to read
         print(f"Accepted connection from {addr}")
         conn.setblocking(False)
-        self.message = libserver.Message(self.sel, conn, addr, self._regeon)
+        self.message = libServer.Message(self.sel, conn, addr, self._regeon)
         self.sel.register(conn, selectors.EVENT_READ, data=self.message)
 
     def Main(self, port):

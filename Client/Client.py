@@ -5,7 +5,7 @@ import socket
 import selectors
 import traceback
 
-import libclient
+import libClient
 
 class Client:
     
@@ -36,7 +36,7 @@ class Client:
         sock.setblocking(False)
         sock.connect_ex(addr)
         events = selectors.EVENT_READ | selectors.EVENT_WRITE
-        message = libclient.Message(self.sel, sock, addr, request)
+        message = libClient.Message(self.sel, sock, addr, request)
         self.sel.register(sock, events, data=message)
 
 
